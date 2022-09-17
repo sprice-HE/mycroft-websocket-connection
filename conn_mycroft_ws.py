@@ -13,13 +13,13 @@ logging.basicConfig(filename="/yourfilepath/filename", level=logging.INFO)
 
 async def sendMycroftUtt(msg):
     try:
-		#this is your mycroft message bus websocket location, this is the default location
-		url='ws://localhost:8181/core'
-		#connect and send msg to mycroft message bus
+	#this is your mycroft message bus websocket location, this is the default location
+	url='ws://localhost:8181/core'
+	#connect and send msg to mycroft message bus
         async with websockets.connect(url) as websocket:
-			#the message is a string without "", those are added below
-			#so don't pass a string like '"message"'
-			#if you print or log m, the utterances value should look like: ["your message"]
+	    #the message is a string without "", those are added below
+	    #so don't pass a string like '"message"'
+ 	    #if you print or log m, the utterances value should look like: ["your message"]
             m = '{"type": "recognizer_loop:utterance", "data": {"utterances": ["' + str(msg) +'"],"lang":"en-us"'+'}'+'}'
             result = await websocket.send(m)
             logging.info(result)
